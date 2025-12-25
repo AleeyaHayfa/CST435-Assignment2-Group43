@@ -18,9 +18,9 @@ def process_image(image_path):
         img_np = filters.apply_sharpen(img_np)
         img_np = filters.apply_brightness(img_np)
         
-        # New Path Logic:
-        # If image is food/input/apple_pie/101.jpg
-        # we want to save to food/output/apple_pie/101.jpg
+        # Path Logic:
+        # Image: food/input/apple_pie/101.jpg
+        # Save to food/output/apple_pie/101.jpg
         relative_path = image_path.relative_to("food/input")
         output_path = Path("food/output") / relative_path
         
@@ -52,7 +52,7 @@ if __name__ == "__main__":
         start_time = time.time()
         
         with concurrent.futures.ProcessPoolExecutor(max_workers=p) as executor:
-            # We cast to list to force the generator to execute
+            #Cast to list to force the generator to execute
             list(executor.map(process_image, image_paths))
             
         parallel_run_time = time.time() - start_time
